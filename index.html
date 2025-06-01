@@ -5,68 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abisar - Premium Tech Store</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        /* Custom styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            opacity: 0;
+            animation: pageLoad 0.5s ease forwards;
+        }
+        @keyframes pageLoad {
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
+        .animate-on-scroll {
+            opacity: 0;
+        }
+        .animate-on-scroll.visible {
+            animation: fadeInUp 0.6s ease-out forwards;
         }
         .product-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
         }
         .carousel {
             display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-        .carousel::-webkit-scrollbar {
-            display: none;
+            transition: transform 0.5s ease;
         }
         .carousel img {
-            scroll-snap-align: start;
-            margin-right: 10px;
-            max-width: 100%;
-            height: 200px;
+            width: 100%;
+            height: 250px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 10px;
+            flex: 0 0 100%;
+        }
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            user-select: none;
+        }
+        .carousel-nav.left { left: 10px; }
+        .carousel-nav.right { right: 10px; }
+        .original-price {
+            text-decoration: line-through;
+            color: #e53e3e;
+        }
+        .gradient-button {
+            background: linear-gradient(45deg, #f97316, #ef4444);
+            transition: background 0.3s ease;
+        }
+        .gradient-button:hover {
+            background: linear-gradient(45deg, #ef4444, #f97316);
+        }
+        .gradient-header {
+            background: linear-gradient(45deg, #06b6d4, #3b82f6);
         }
     </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100">
     <!-- Header -->
-    <header class="bg-blue-600 text-white p-6 text-center sticky top-0 z-10">
-        <h1 class="text-4xl font-extrabold tracking-tight">Abisar</h1>
-        <p class="mt-2 text-lg opacity-90">Discover premium tech at unbeatable prices</p>
+    <header class="gradient-header text-white p-8 text-center sticky top-0 z-10">
+        <h1 class="text-5xl font-bold tracking-tight">Abisar</h1>
+        <p class="mt-3 text-xl opacity-90">Unleash the Future: Premium Tech at Unbeatable Prices</p>
     </header>
 
     <!-- Product Section -->
-    <section class="container mx-auto p-6">
-        <h2 class="text-3xl font-bold mb-6 text-center">Our Products</h2>
-        <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <section class="container mx-auto p-8">
+        <h2 class="text-4xl font-bold mb-8 text-center text-gray-800">Our Products</h2>
+        <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Products will be dynamically inserted here -->
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="bg-gray-800 text-white p-8 text-center">
-        <h2 class="text-3xl font-bold mb-4">Get in Touch</h2>
-        <p class="text-lg mb-2">Have questions or want to buy? Reach out to us!</p>
-        <p class="mb-2">Email: <a href="mailto:bughuntermir@gmail.com" class="underline hover:text-blue-400">bughuntermir@gmail.com</a></p>
+    <section class="bg-gray-800 text-white p-10 text-center">
+        <h2 class="text-4xl font-bold mb-6">Get in Touch</h2>
+        <p class="text-lg mb-3">Questions or ready to buy? Contact us now!</p>
+        <p class="mb-3">Email: <a href="mailto:mirmohmmadluqman@gmail.com" class="underline hover:text-orange-400">mirmohmmadluqman@gmail.com</a></p>
         <p>Address: Srinagar, Jammu and Kashmir, India</p>
-        <a href="mailto:bughuntermir@gmail.com?subject=General Inquiry" class="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">Send Inquiry</a>
+        <a href="mailto:mirmohmmadluqman@gmail.com?subject=General Inquiry" class="mt-6 inline-block gradient-button text-white px-6 py-3 rounded-full">Send Inquiry</a>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-blue-600 text-white p-4 text-center">
+    <footer class="gradient-header text-white p-6 text-center">
         <p>© 2025 Abisar. All rights reserved.</p>
     </footer>
 
@@ -77,7 +114,8 @@
                 id: 1,
                 name: "PS4 Ronaldo and Messi Edition",
                 description: "Limited edition PS4 with custom Ronaldo and Messi artwork, 500 GB storage, perfect for gaming enthusiasts. Includes one controller and supports all major PS4 titles.",
-                price: "₹15,000",
+                originalPrice: "₹40,000",
+                discountedPrice: "₹15,000",
                 images: ["1A.png", "1B.png", "1C.png", "1D.png"],
                 category: "Gaming Console"
             },
@@ -85,7 +123,8 @@
                 id: 2,
                 name: "iPhone 4",
                 description: "Classic iPhone 4 in good condition, 8 GB storage, iOS 7, ideal for collectors or budget users. Features a 3.5-inch Retina display and 5 MP camera.",
-                price: "₹900",
+                originalPrice: "₹2,000",
+                discountedPrice: "₹900",
                 images: ["2A.png", "2B.png", "2C.png", "2D.png"],
                 category: "Smartphone"
             },
@@ -93,7 +132,8 @@
                 id: 3,
                 name: "Nubia Red Magic 8s Pro 5G (Transformer Limited Edition)",
                 description: "High-performance gaming phone with Snapdragon 8 Gen 2, 16 GB RAM, 512 GB storage, 6.8-inch AMOLED display, 120 Hz refresh rate, and Transformer-themed design.",
-                price: "₹35,000",
+                originalPrice: "₹90,000",
+                discountedPrice: "₹35,000",
                 images: ["3A.png"],
                 category: "Gaming Smartphone"
             },
@@ -101,7 +141,8 @@
                 id: 4,
                 name: "Alienware M14 RX",
                 description: "Powerful gaming laptop with Intel i7 3rd Gen processor, 24 GB RAM, 500 GB SSD, 14-inch 120 Hz display, NVIDIA GTX graphics, and Windows 10 Home.",
-                price: "₹45,000",
+                originalPrice: "₹60,000",
+                discountedPrice: "₹20,000",
                 images: ["4A.png"],
                 category: "Gaming Laptop"
             },
@@ -109,7 +150,8 @@
                 id: 5,
                 name: "Samsung A12",
                 description: "Reliable budget smartphone with 4 GB RAM, 64 GB storage, 6.5-inch PLS LCD, 48 MP quad-camera, and 5000 mAh battery. Perfect for everyday use.",
-                price: "₹8,000",
+                originalPrice: "₹17,000",
+                discountedPrice: "₹8,000",
                 images: ["5A.png"],
                 category: "Smartphone"
             },
@@ -117,7 +159,8 @@
                 id: 6,
                 name: "Redmi A3",
                 description: "Budget-friendly smartphone in excellent condition, 4 GB RAM, 64 GB storage, 6.71-inch HD+ display, MediaTek Helio processor, and 5000 mAh battery.",
-                price: "₹6,000",
+                originalPrice: "₹16,000",
+                discountedPrice: "₹6,000",
                 images: ["6A.png"],
                 category: "Smartphone"
             },
@@ -125,7 +168,8 @@
                 id: 7,
                 name: "ZTE Nubia Red Magic 4",
                 description: "Gaming phone with Android 13, Snapdragon 855, 12 GB RAM, 256 GB storage, 6.65-inch AMOLED display, and 144 Hz refresh rate. Ideal for mobile gamers.",
-                price: "₹30,000",
+                originalPrice: "₹70,000",
+                discountedPrice: "₹30,000",
                 images: ["7A.png"],
                 category: "Gaming Smartphone"
             },
@@ -133,7 +177,8 @@
                 id: 8,
                 name: "ZTE Red Magic 7",
                 description: "Gaming phone with Snapdragon 8 Gen 1, 12 GB RAM, 256 GB storage, 6.8-inch AMOLED display with a 165 Hz refresh rate (slight crack on display, fully functional).",
-                price: "₹25,000",
+                originalPrice: "₹50,000",
+                discountedPrice: "₹25,000",
                 images: ["8A.png"],
                 category: "Gaming Smartphone"
             },
@@ -141,7 +186,8 @@
                 id: 9,
                 name: "HP Pavilion Gaming F15",
                 description: "Gaming laptop with Ryzen 5 5600H, GTX 1650 4 GB GDDR6, 16 GB dual-channel RAM (3000 MHz), 256 GB NVMe SSD, and 15.6-inch 144 Hz display.",
-                price: "₹32,000",
+                originalPrice: "₹1,00,000",
+                discountedPrice: "₹32,000",
                 images: ["9A.png"],
                 category: "Gaming Laptop"
             },
@@ -149,7 +195,8 @@
                 id: 10,
                 name: "iPhone 7",
                 description: "Sleek iPhone 7 with 128 GB storage, A10 Fusion chip, 4.7-inch Retina HD display, 12 MP camera, and iOS 15. Great for daily use.",
-                price: "₹9,000",
+                originalPrice: "₹20,000",
+                discountedPrice: "₹9,000",
                 images: ["10A.png"],
                 category: "Smartphone"
             },
@@ -157,7 +204,8 @@
                 id: 11,
                 name: "Xiaomi Redmi Turbo 4 Pro (Harry Potter Limited Edition)",
                 description: "Unique Harry Potter-themed smartphone with Snapdragon 7+ Gen 2, 12 GB RAM, 512 GB storage, 6.67-inch AMOLED display, 120 Hz refresh rate, and 50 MP camera.",
-                price: "₹28,000",
+                originalPrice: "₹50,000",
+                discountedPrice: "₹28,000",
                 images: ["11A.png"],
                 category: "Smartphone"
             },
@@ -165,7 +213,8 @@
                 id: 12,
                 name: "ZTE Nubia Z70 Ultra 5G",
                 description: "Premium gaming phone with Android 15, 24 GB RAM, 1 TB storage, Snapdragon 8 Gen 3, 6.8-inch AMOLED display, and 165 Hz refresh rate.",
-                price: "₹40,000",
+                originalPrice: "₹90,000",
+                discountedPrice: "₹40,000",
                 images: ["12A.png"],
                 category: "Gaming Smartphone"
             },
@@ -173,7 +222,8 @@
                 id: 13,
                 name: "SVE Evo 998 Macro Drone",
                 description: "Advanced drone with 4K Ultra HD top camera, 720p bottom camera, 15-minute flight time, GPS, and 1 km range. Perfect for aerial photography and videography.",
-                price: "₹20,000",
+                originalPrice: "₹30,000",
+                discountedPrice: "₹3,000",
                 images: ["13A.png"],
                 category: "Drone"
             }
@@ -184,19 +234,57 @@
 
         products.forEach((product, index) => {
             const productCard = document.createElement("div");
-            productCard.className = "product-card bg-white p-6 rounded-lg shadow-lg animate-fade-in";
-            productCard.style.animationDelay = `${index * 0.1}s`;
+            productCard.className = "product-card bg-white p-6 rounded-xl shadow-lg animate-on-scroll";
             productCard.innerHTML = `
-                <h3 class="text-xl font-semibold mb-2">${product.name}</h3>
+                <h3 class="text-2xl font-semibold mb-3 text-gray-800">${product.name}</h3>
                 <p class="text-gray-600 mb-4">${product.description}</p>
-                <p class="text-green-600 font-bold mb-4">${product.price}</p>
-                <div class="carousel mb-4">
-                    ${product.images.map(img => `<img src="elements/${img}" alt="${product.name}" class="lazy" loading="lazy">`).join("")}
+                <div class="flex items-center mb-4">
+                    <p class="text-orange-500 font-bold text-xl">${product.discountedPrice}</p>
+                    <p class="original-price ml-3 text-sm">${product.originalPrice}</p>
+                </div>
+                <div class="carousel-container">
+                    <div class="carousel" id="carousel-${product.id}">
+                        ${product.images.map(img => `<img src="elements/${img}" alt="${product.name}" class="lazy" loading="lazy">`).join("")}
+                    </div>
+                    <div class="carousel-nav left" onclick="moveCarousel(${product.id}, -1)">&#10094;</div>
+                    <div class="carousel-nav right" onclick="moveCarousel(${product.id}, 1)">&#10095;</div>
                 </div>
                 <p class="text-gray-500 mb-4">Category: ${product.category}</p>
-                <a href="mailto:bughuntermir@gmail.com?subject=Inquiry about ${product.name}" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition">Contact to Buy</a>
+                <a href="mailto:mirmohmmadluqman@gmail.com?subject=Inquiry about ${product.name}" class="inline-block gradient-button text-white px-6 py-3 rounded-full">Contact to Buy</a>
             `;
             productList.appendChild(productCard);
+
+            // Auto-scroll carousel
+            let currentIndex = 0;
+            const carousel = document.getElementById(`carousel-${product.id}`);
+            if (carousel.children.length > 1) {
+                setInterval(() => {
+                    currentIndex = (currentIndex + 1) % carousel.children.length;
+                    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }, 5000);
+            }
+        });
+
+        // Carousel navigation
+        function moveCarousel(productId, direction) {
+            const carousel = document.getElementById(`carousel-${productId}`);
+            const totalImages = carousel.children.length;
+            let currentIndex = parseInt(carousel.style.transform?.replace("translateX(-", "")?.replace("%)", "") || 0) / 100;
+            currentIndex = (currentIndex + direction + totalImages) % totalImages;
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll(".animate-on-scroll").forEach(card => {
+            observer.observe(card);
         });
     </script>
 </body>
