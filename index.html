@@ -101,6 +101,7 @@
             padding: 0.5rem 1rem;
             border-radius: 4px;
             transition: background-color 0.2s ease;
+            text-decoration: none;
         }
         .buy-button:hover {
             background-color: #F7CA00;
@@ -125,20 +126,6 @@
             max-width: 90%;
             max-height: 90%;
             border-radius: 8px;
-        }
-        #contactModal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 1000;
-            max-width: 400px;
-            width: 90%;
         }
         #backToTop {
             position: fixed;
@@ -237,30 +224,16 @@
         <p class="text-gray-600 mb-2">Questions or ready to buy? Contact us now!</p>
         <p class="mb-2">Email: <a href="mailto:abisarstore@gmail.com" class="text-blue-600 hover:underline">abisarstore@gmail.com</a></p>
         <p class="mb-4">Address: Srinagar, Jammu and Kashmir, India</p>
-        <button id="contactButton" class="buy-button">Contact to Buy</button>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>© 2025 Abisar. All rights reserved. | <a href="mailto:abisarstore@gmail.com">Contact Us</a></p>
+        <p>© 2025 Abisar. All rights reserved. | <a href="mailto:abisarstore@gmail.com">abisarstore@gmail.com</a> | Srinagar, Jammu and Kashmir, India</p>
     </footer>
 
     <!-- Zoom Modal -->
     <div id="zoomModal">
         <img id="zoomImageElement" src="" alt="Zoomed product image">
-    </div>
-
-    <!-- Contact Modal -->
-    <div id="contactModal">
-        <h3 class="text-xl font-bold mb-4">Contact Us</h3>
-        <p class="text-gray-600 mb-4">Send us your inquiry, and we'll get back to you soon!</p>
-        <input type="text" id="contactName" placeholder="Your Name" class="w-full p-2 mb-2 border rounded" aria-label="Your Name">
-        <input type="email" id="contactEmail" placeholder="Your Email" class="w-full p-2 mb-2 border rounded" aria-label="Your Email">
-        <textarea id="contactMessage" placeholder="Your Message" class="w-full p-2 mb-2 border rounded" rows="4" aria-label="Your Message"></textarea>
-        <div class="flex justify-end space-x-2">
-            <button id="contactCancel" class="buy-button bg-gray-300 hover:bg-gray-400">Cancel</button>
-            <button id="contactSubmit" class="buy-button">Send</button>
-        </div>
     </div>
 
     <!-- Back to Top Button -->
@@ -274,35 +247,28 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Intersection Observer polyfill
-            if (!window.IntersectionObserver) {
-                const script = document.createElement("script");
-                script.src = "https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver";
-                document.head.appendChild(script);
-            }
-
             // Product data
             const products = [
                 {
                     id: 1,
                     name: "PS4 Ronaldo and Messi Edition",
-                    description: "Limited edition PS4 with custom Ronaldo and Messi artwork (images show standard PS4 Slim), 500 GB storage, perfect for gaming enthusiasts. Includes one controller and supports all major PS4 titles.",
-                    originalPrice: "₹40,000",
+                    description: "Limited edition PS4 with custom Ronaldo and Messi artwork (images show standard PS4 Slim), 500 GB storage, includes one controller, supports all major PS4 titles.",
+                    originalPrice: "₹48,000",
                     discountedPrice: "₹15,000",
                     category: "Gaming Console",
                     rating: 4,
                     onlineImages: [
-                        "https://images.unsplash.com/photo-1486401898001-1d7240a0d3c0",
-                        "https://images.unsplash.com/photo-1477948879621-787e877d4366",
-                        "https://images.unsplash.com/photo-1484589065579-248aad0d8b13",
-                        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
+                        "https://images.pexels.com/photos/3945659/pexels-photo-3945659.jpeg",
+                        "https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg",
+                        "https://images.pexels.com/photos/2582938/pexels-photo-2582938.jpeg",
+                        "https://images.pexels.com/photos/7876708/pexels-photo-7876708.jpeg"
                     ]
                 },
                 {
                     id: 2,
                     name: "iPhone 4",
-                    description: "Classic iPhone 4 in good condition, 8 GB storage, iOS 7, ideal for collectors or budget users. Features a 3.5-inch Retina display and 5 MP camera.",
-                    originalPrice: "₹2,000",
+                    description: "Classic iPhone 4, 8 GB storage, iOS 7, 3.5-inch Retina display, 5 MP camera, ideal for collectors or budget users.",
+                    originalPrice: "₹2,500",
                     discountedPrice: "₹900",
                     category: "Smartphone",
                     rating: 3,
@@ -316,9 +282,9 @@
                 {
                     id: 3,
                     name: "Nubia Red Magic 8S Pro 5G (Transformer Limited Edition)",
-                    description: "High-performance gaming phone with Snapdragon 8 Gen 2, 16 GB RAM, 512 GB storage, 6.8-inch AMOLED display, 120 Hz refresh rate, and Transformer-themed design (images show standard Red Magic 8S Pro).",
-                    originalPrice: "₹90,000",
-                    discountedPrice: "₹35,000",
+                    description: "Gaming phone with Snapdragon 8 Gen 2, 16 GB RAM, 512 GB storage, 6.8-inch AMOLED, 120 Hz, Transformer-themed design (images show standard Red Magic 8S Pro).",
+                    originalPrice: "₹211,000",
+                    discountedPrice: "₹40,000",
                     category: "Gaming Smartphone",
                     rating: 5,
                     onlineImages: [
@@ -331,8 +297,8 @@
                 {
                     id: 4,
                     name: "Alienware M14 RX",
-                    description: "Powerful gaming laptop with Intel i7 3rd Gen processor, 24 GB RAM, 500 GB SSD, 14-inch 120 Hz display, NVIDIA GTX graphics, and Windows 10 Home (images show generic gaming laptop).",
-                    originalPrice: "₹60,000",
+                    description: "Gaming laptop with Intel i7 3rd Gen, 24 GB RAM, 500 GB SSD, 14-inch 120 Hz, NVIDIA GTX, Windows 10 Home (images show generic gaming laptop).",
+                    originalPrice: "₹72,000",
                     discountedPrice: "₹20,000",
                     category: "Gaming Laptop",
                     rating: 4,
@@ -345,9 +311,9 @@
                 },
                 {
                     id: 5,
-                    name: "Samsung A12",
-                    description: "Reliable budget smartphone with 4 GB RAM, 64 GB storage, 6.5-inch PLS LCD, 48 MP quad-camera, and 5000 mAh battery. Perfect for everyday use.",
-                    originalPrice: "₹17,000",
+                    name: "Samsung Galaxy A12",
+                    description: "Budget smartphone with 4 GB RAM, 64 GB storage, 6.5-inch PLS LCD, 48 MP quad-camera, 5000 mAh battery.",
+                    originalPrice: "₹20,400",
                     discountedPrice: "₹8,000",
                     category: "Smartphone",
                     rating: 4,
@@ -361,8 +327,8 @@
                 {
                     id: 6,
                     name: "Redmi A3",
-                    description: "Budget-friendly smartphone in excellent condition, 4 GB RAM, 64 GB storage, 6.71-inch HD+ display, MediaTek Helio processor, and 5000 mAh battery.",
-                    originalPrice: "₹16,000",
+                    description: "Budget smartphone, 4 GB RAM, 64 GB storage, 6.71-inch HD+, MediaTek Helio, 5000 mAh battery.",
+                    originalPrice: "₹19,200",
                     discountedPrice: "₹6,000",
                     category: "Smartphone",
                     rating: 3,
@@ -376,8 +342,8 @@
                 {
                     id: 7,
                     name: "ZTE Nubia Red Magic 4",
-                    description: "Gaming phone with Android 13, Snapdragon 855, 12 GB RAM, 256 GB storage, 6.65-inch AMOLED display, and 144 Hz refresh rate. Ideal for mobile gamers (images show Red Magic 5G).",
-                    originalPrice: "₹70,000",
+                    description: "Gaming phone with Snapdragon 855, 12 GB RAM, 256 GB storage, 6.65-inch AMOLED, 144 Hz (images show Red Magic 5G).",
+                    originalPrice: "₹84,000",
                     discountedPrice: "₹30,000",
                     category: "Gaming Smartphone",
                     rating: 4,
@@ -391,8 +357,8 @@
                 {
                     id: 8,
                     name: "ZTE Red Magic 7",
-                    description: "Gaming phone with Snapdragon 8 Gen 1, 12 GB RAM, 256 GB storage, 6.8-inch AMOLED display with a 165 Hz refresh rate (slight crack on display, fully functional).",
-                    originalPrice: "₹50,000",
+                    description: "Gaming phone with Snapdragon 8 Gen 1, 12 GB RAM, 256 GB storage, 6.8-inch AMOLED, 165 Hz (slight display crack, fully functional).",
+                    originalPrice: "₹60,000",
                     discountedPrice: "₹25,000",
                     category: "Gaming Smartphone",
                     rating: 4,
@@ -406,8 +372,8 @@
                 {
                     id: 9,
                     name: "HP Pavilion Gaming F15",
-                    description: "Gaming laptop with Ryzen 5 5600H, GTX 1650 4 GB GDDR6, 16 GB dual-channel RAM (3000 MHz), 256 GB NVMe SSD, and 15.6-inch 144 Hz display (images show generic gaming laptop).",
-                    originalPrice: "₹1,00,000",
+                    description: "Gaming laptop with Ryzen 5 5600H, GTX 1650 4 GB, 16 GB RAM, 256 GB NVMe SSD, 15.6-inch 144 Hz (images show generic gaming laptop).",
+                    originalPrice: "₹120,000",
                     discountedPrice: "₹32,000",
                     category: "Gaming Laptop",
                     rating: 5,
@@ -421,8 +387,8 @@
                 {
                     id: 10,
                     name: "iPhone 7",
-                    description: "Sleek iPhone 7 with 128 GB storage, A10 Fusion chip, 4.7-inch Retina HD display, 12 MP camera, and iOS 15. Great for daily use.",
-                    originalPrice: "₹20,000",
+                    description: "iPhone 7 with 128 GB storage, A10 Fusion, 4.7-inch Retina HD, 12 MP camera, iOS 15.",
+                    originalPrice: "₹24,000",
                     discountedPrice: "₹9,000",
                     category: "Smartphone",
                     rating: 4,
@@ -436,23 +402,23 @@
                 {
                     id: 11,
                     name: "Xiaomi Redmi Turbo 4 Pro (Harry Potter Limited Edition)",
-                    description: "Unique Harry Potter-themed smartphone with Snapdragon 7+ Gen 2, 12 GB RAM, 512 GB storage, 6.67-inch AMOLED display, 120 Hz refresh rate, and 50 MP camera (images show standard Redmi Turbo 3).",
-                    originalPrice: "₹50,000",
+                    description: "Harry Potter-themed smartphone with Snapdragon 8s Gen 4, 16 GB RAM, 512 GB storage, 6.83-inch OLED, 120 Hz, 50 MP camera (images show standard Redmi Turbo 4 Pro).",
+                    originalPrice: "₹60,000",
                     discountedPrice: "₹28,000",
                     category: "Smartphone",
                     rating: 4,
                     onlineImages: [
-                        "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-turbo-3-1.jpg",
-                        "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-turbo-3-2.jpg",
-                        "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-turbo-3-3.jpg",
-                        "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-turbo-3-4.jpg"
+                        "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-turbo-4-pro-1.jpg",
+                        "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-turbo-4-pro-2.jpg",
+                        "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-turbo-4-pro-3.jpg",
+                        "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-turbo-4-pro-4.jpg"
                     ]
                 },
                 {
                     id: 12,
                     name: "ZTE Nubia Z70 Ultra 5G (Galaxy Edition)",
-                    description: "Premium gaming smartphone with Snapdragon 8 Elite, 24 GB RAM, 1 TB storage, 6.85-inch OLED display with 144Hz refresh rate, 50MP triple camera with 35mm variable aperture, and 6150 mAh battery with 80W fast charging. Galaxy Edition features a unique starry finish (images show standard ZTE Nubia Z60 Ultra).",
-                    originalPrice: "₹90,000",
+                    description: "Gaming smartphone with Snapdragon 8 Elite, 24 GB RAM, 1 TB storage, 6.85-inch OLED, 144Hz, 50MP triple camera, 6150 mAh battery (images show ZTE Nubia Z60 Ultra).",
+                    originalPrice: "₹108,000",
                     discountedPrice: "₹55,000",
                     category: "Gaming Smartphone",
                     rating: 5,
@@ -466,41 +432,71 @@
                 {
                     id: 13,
                     name: "SVE Evo 998 Macro Drone",
-                    description: "Advanced drone with 4K Ultra HD top camera, 720p bottom camera, 15-minute flight time, GPS, and 1 km range. Perfect for aerial photography and videography (images show generic 4K drone).",
-                    originalPrice: "₹30,000",
+                    description: "Advanced drone with 4K Ultra HD top camera, 720p bottom camera, 15-minute flight time, GPS, 1 km range, ideal for aerial photography.",
+                    originalPrice: "₹5,000",
                     discountedPrice: "₹3,000",
                     category: "Drone",
                     rating: 4,
                     onlineImages: [
-                        "https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg",
-                        "https://images.pexels.com/photos/442588/pexels-photo-442588.jpeg",
-                        "https://images.pexels.com/photos/164678/pexels-photo-164678.jpeg",
-                        "https://images.pexels.com/photos/306253/pexels-photo-306253.jpeg"
+                        "https://images.pexels.com/photos/442616/pexels-photo-442616.jpeg",
+                        "https://images.pexels.com/photos/287496/pexels-photo-287496.jpeg",
+                        "https://images.pexels.com/photos/306803/pexels-photo-306803.jpeg",
+                        "https://images.pexels.com/photos/442578/pexels-photo-442578.jpeg"
                     ]
                 },
                 {
                     id: 14,
                     name: "iPhone X",
-                    description: "Revolutionary iPhone X with 64 GB storage, A11 Bionic chip, 5.8-inch Super Retina display, Face ID, and dual 12 MP cameras. Running iOS 14, perfect for modern use.",
-                    originalPrice: "₹40,000",
+                    description: "iPhone X with 64 GB storage, A11 Bionic, 5.8-inch Super Retina, Face ID, dual 12 MP cameras, iOS 14.",
+                    originalPrice: "₹48,000",
                     discountedPrice: "₹18,000",
                     category: "Smartphone",
                     rating: 4,
                     onlineImages: [
                         "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-x-1.jpg",
-                        "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-x-2.jpg",
+                        "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-x-2.png",
                         "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-x-3.jpg",
-                        "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-x-4.jpg"
+                        "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-x-6.jpg"
                     ]
                 },
                 {
                     id: 15,
                     name: "HP EliteBook G3",
-                    description: "Reliable business laptop with Intel Core i5, 8 GB RAM, 700 GB HDD + 240 GB SSD, 14-inch Full HD display, and Windows 10 Pro. Ideal for professionals and students (images show generic laptops).",
-                    originalPrice: "₹45,000",
+                    description: "Business laptop with Intel Core i5, 8 GB RAM, 700 GB HDD + 240 GB SSD, 14-inch Full HD, Windows 10 Pro (images show generic laptops).",
+                    originalPrice: "₹54,000",
                     discountedPrice: "₹20,000",
                     category: "Laptop",
                     rating: 4,
+                    onlineImages: [
+                        "https://images.pexels.com/photos/18105/pexels-photo.jpg",
+                        "https://images.pexels.com/photos/7974/pexels-photo.jpg",
+                        "https://images.pexels.com/photos/5775/pexels-photo-5775.jpeg",
+                        "https://images.pexels.com/photos/69432/pexels-photo-69432.jpeg"
+                    ]
+                },
+                {
+                    id: 16,
+                    name: "HP Pavilion x360",
+                    description: "2-in-1 laptop with 512GB SSD, 16GB RAM, Intel i5 processor, ideal for work and entertainment.",
+                    originalPrice: "₹80,800",
+                    discountedPrice: "₹35,000",
+                    category: "Laptop",
+                    rating: 4,
+                    onlineImages: [
+                        "https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c06621739.png",
+                        "https://images.pexels.com/photos/7974/pexels-photo.jpg",
+                        "https://images.pexels.com/photos/18105/pexels-photo.jpg",
+                        "https://images.pexels.com/photos/69432/pexels-photo-69432.jpeg"
+                    ]
+                },
+                {
+                    id: 17,
+                    name: "Lenovo ThinkPad P51",
+                    description: "Workstation laptop with 16GB RAM, 512GB SSD, touch screen, NVIDIA Quadro M1200, perfect for professionals.",
+                    originalPrice: "₹120,000",
+                    discountedPrice: "₹35,000",
+                    category: "Laptop",
+                    rating: 5,
                     onlineImages: [
                         "https://images.pexels.com/photos/18105/pexels-photo.jpg",
                         "https://images.pexels.com/photos/7974/pexels-photo.jpg",
@@ -520,10 +516,6 @@
             const backToTop = document.getElementById("backToTop");
             const liveChat = document.getElementById("liveChat");
             const loadingSpinner = document.getElementById("loadingSpinner");
-            const contactButton = document.getElementById("contactButton");
-            const contactModal = document.getElementById("contactModal");
-            const contactCancel = document.getElementById("contactCancel");
-            const contactSubmit = document.getElementById("contactSubmit");
 
             // State variables
             let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
@@ -532,6 +524,18 @@
             // Helper functions
             function renderStars(rating) {
                 return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+            }
+
+            function loadImage(imgElement, localSrc, onlineSrc, placeholderSrc) {
+                imgElement.src = localSrc;
+                imgElement.onerror = () => {
+                    imgElement.src = onlineSrc;
+                    imgElement.onerror = () => {
+                        imgElement.src = placeholderSrc;
+                        imgElement.classList.add('error');
+                        imgElement.alt = 'Image Not Available';
+                    };
+                };
             }
 
             function renderProducts(filteredProducts) {
@@ -545,9 +549,10 @@
                 filteredProducts.forEach(product => {
                     const letters = ['A', 'B', 'C', 'D'];
                     const imageElements = letters.map((letter, idx) => {
-                        const localPath = `elements/${product.id}${letter}.png`;
+                        const localPath = `elements/${product.id}${letter}.jpg`;
                         const onlinePath = product.onlineImages[idx] || "https://via.placeholder.com/200x200?text=Image+Not+Found";
-                        return `<img src="${localPath}" alt="${product.name} image ${letter}" class="lazy" loading="lazy" onerror="this.src='${onlinePath}'; this.classList.add('error');" onclick="showZoomImage('${localPath}', '${onlinePath}')">`;
+                        const placeholderPath = "https://via.placeholder.com/200x200?text=Image+Not+Available";
+                        return `<img src="${localPath}" alt="${product.name} image ${letter}" class="lazy" loading="lazy" data-online="${onlinePath}" data-placeholder="${placeholderPath}">`;
                     });
                     const productCard = document.createElement("div");
                     productCard.className = "product-card";
@@ -556,8 +561,8 @@
                             <div class="carousel" id="carousel_${product.id}">
                                 ${imageElements.join('')}
                             </div>
-                            <div class="carousel-nav left hidden" onclick="moveCarousel(${product.id}, -1)">←</div>
-                            <div class="carousel-nav right" onclick="moveCarousel(${product.id}, 1)">→</div>
+                            <div class="carousel-nav left hidden">←</div>
+                            <div class="carousel-nav right">→</div>
                         </div>
                         <h3 class="text-lg font-medium mt-2 text-gray-900 truncate">${product.name}</h3>
                         <p class="text-sm text-gray-600 line-clamp-2">${product.description}</p>
@@ -570,19 +575,40 @@
                             <button class="buy-button wishlist-btn" data-id="${product.id}" aria-label="${wishlist.includes(product.id) ? 'Remove from' : 'Add to'} wishlist">
                                 ${wishlist.includes(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
                             </button>
-                            <button class="buy-button" onclick="openContactModal('${product.name}')">Buy Now</button>
+                            <a href="mailto:abisarstore@gmail.com?subject=Purchase Inquiry for ${encodeURIComponent(product.name)}" class="buy-button">Buy Now</a>
                         </div>
                     `;
                     productList.appendChild(productCard);
+
+                    // Load images with fallback
+                    productCard.querySelectorAll('.carousel img').forEach(img => {
+                        const localSrc = img.src;
+                        const onlineSrc = img.dataset.online;
+                        const placeholderSrc = img.dataset.placeholder;
+                        loadImage(img, localSrc, onlineSrc, placeholderSrc);
+                    });
+
+                    // Add event listeners for carousel navigation
+                    const leftNav = productCard.querySelector('.carousel-nav.left');
+                    const rightNav = productCard.querySelector('.carousel-nav.right');
+                    if (leftNav && rightNav) {
+                        leftNav.addEventListener('click', () => moveCarousel(product.id, -1));
+                        rightNav.addEventListener('click', () => moveCarousel(product.id, 1));
+                    }
                 });
                 initializeCarousels();
                 initializeWishlist();
                 loadingSpinner.style.display = 'none';
             }
 
-            function showZoomImage(localSrc, onlineSrc) {
-                zoomImageElement.src = localSrc;
-                zoomImageElement.onerror = () => { zoomImageElement.src = onlineSrc; };
+            function showZoomImage(imgElement) {
+                zoomImageElement.src = imgElement.src;
+                zoomImageElement.onerror = () => {
+                    zoomImageElement.src = imgElement.dataset.online;
+                    zoomImageElement.onerror = () => {
+                        zoomImageElement.src = imgElement.dataset.placeholder;
+                    };
+                };
                 zoomModal.style.display = 'flex';
             }
 
@@ -607,6 +633,9 @@
                         carousel.parentElement.querySelector('.carousel-nav.right').classList.remove('hidden');
                     }
                     carousel.dataset.index = 0;
+                    images.forEach(img => {
+                        img.addEventListener('click', () => showZoomImage(img));
+                    });
                 });
             }
 
@@ -636,45 +665,12 @@
                 renderProducts(filtered);
             }
 
-            function openContactModal(productName = '') {
-                if (productName) {
-                    document.getElementById('contactMessage').value = `Interested in purchasing: ${productName}`;
-                }
-                contactModal.style.display = 'block';
-            }
-
             // Event listeners
             searchInput.addEventListener('input', filterProducts);
             categoryFilter.addEventListener('change', filterProducts);
 
             zoomModal.addEventListener('click', (e) => {
                 if (e.target !== zoomImageElement) zoomModal.style.display = 'none';
-            });
-
-            contactButton.addEventListener('click', () => openContactModal());
-
-            contactCancel.addEventListener('click', () => {
-                contactModal.style.display = 'none';
-                document.getElementById('contactName').value = '';
-                document.getElementById('contactEmail').value = '';
-                document.getElementById('contactMessage').value = '';
-            });
-
-            contactSubmit.addEventListener('click', () => {
-                const name = document.getElementById('contactName').value;
-                const email = document.getElementById('contactEmail').value;
-                const message = document.getElementById('contactMessage').value;
-                if (name && email && message) {
-                    const subject = encodeURIComponent('Purchase Inquiry');
-                    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
-                    window.location.href = `mailto:abisarstore@gmail.com?subject=${subject}&body=${body}`;
-                    contactModal.style.display = 'none';
-                    document.getElementById('contactName').value = '';
-                    document.getElementById('contactEmail').value = '';
-                    document.getElementById('contactMessage').value = '';
-                } else {
-                    alert('Please fill in all fields.');
-                }
             });
 
             window.addEventListener('scroll', () => {
